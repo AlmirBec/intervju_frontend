@@ -23,9 +23,10 @@ const InputNumbers = () => {
             let sortedArr = response.data.sortedArr;
             for(let i = 0; i < sortedArr.length; i++){
                 let key = 'key' + i;
+                let value = sortedArr[i]
                 setNumbers({
                     ...numbers,
-                    [key]: sortedArr[i]
+                    [key]: value
                 })
             }
 
@@ -46,9 +47,9 @@ const InputNumbers = () => {
 
     const fillRandomData = (e) => {
         e.preventDefault();
-        for (let i = 0; i < 10; i++) {
+        for(const key in numbers){
             let number = Math.floor((Math.random() * 100000));
-            let key = 'key' + i;
+            console.log(number);
             setNumbers({
                 ...numbers,
                 [key] : number,
