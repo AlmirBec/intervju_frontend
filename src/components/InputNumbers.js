@@ -3,86 +3,121 @@ import axios from 'axios'
 import isPrime from '../function/isPrime';
 
 const InputNumbers = () => {
-    const [numbers, setNumbers] = useState([]);
+    const [numbers, setNumbers] = useState({
+    'key0': 0,
+    'key1': 0,
+    'key2': 0,
+    'key3': 0,
+    'key4': 0,
+    'key5': 0,
+    'key6': 0,
+    'key7': 0,
+    'key8': 0,
+    'key9': 0,  
+    });
 
     const handleNumbersSubmit = async (e) =>{
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3001/sort-numbers', {numbers})
-            setNumbers(response.data.sortedArr);
+            const response = await axios.post('http://localhost:3001/sort-numbers', numbers)
+            let sortedArr = response.data.sortedArr;
+            for(let i = 0; i < sortedArr.length; i++){
+                let key = 'key' + i;
+                setNumbers({
+                    ...numbers,
+                    [key]: sortedArr[i]
+                })
+            }
+
         } catch (error) {
             console.error(error);
         }
     }
 
-    const handleInputChange = (newNumber) => {
-        let number = parseInt(newNumber)
-        const newArray = [...numbers, number]
-        setNumbers(newArray);
+    const handleInputChange = (e) => {
+        let key = e.target.name;
+        let value = e.target.value;
+
+        setNumbers({
+            ...numbers,
+            [key]: value
+        })
     }
 
     const fillRandomData = (e) => {
         e.preventDefault();
-        let newArray = [];
         for (let i = 0; i < 10; i++) {
             let number = Math.floor((Math.random() * 100000));
-            newArray = [...newArray, number];
+            let key = 'key' + i;
+            setNumbers({
+                ...numbers,
+                [key] : number,
+            })
         }
-        setNumbers(newArray);
     }
 
     return (
         <>
         <form className='d-flex p-3'> 
             <input type='number'
-             value = {numbers.length === 0 ? 0 : numbers[0]} 
-              className = {isPrime(numbers[0]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-               onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key0'
+             value = {numbers.key0} 
+             className = {isPrime(numbers.key0) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+             onChange={e =>{handleInputChange(e)}}>
             </input>
             <input type='number'
-             value = {numbers.length < 1 ? 0 : numbers[1]}
-             className = {isPrime(numbers[1]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-             onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key1'
+             value = {numbers.key1}
+             className = {isPrime(numbers.key1) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+             onChange={e =>{handleInputChange(e)}}>
             </input>
             <input type='number' 
-            value = {numbers.length < 2 ? 0 : numbers[2]}
-            className = {isPrime(numbers[2]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-            onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key2'
+            value = {numbers.key2}
+            className = {isPrime(numbers.key2) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+            onChange={e =>{handleInputChange(e)}}>
             </input>
             <input type='number'
-            value = {numbers.length < 3 ? 0 : numbers[3]}
-            className = {isPrime(numbers[3]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-            onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key3'
+            value = {numbers.key3}
+            className = {isPrime(numbers.key3) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+            onChange={e =>{handleInputChange(e)}}>
             </input>
             <input type='number'
-            value = {numbers.length < 4 ? 0 : numbers[4]}
-            className = {isPrime(numbers[4]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-            onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key4'
+            value = {numbers.key4}
+            className = {isPrime(numbers.key4) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+            onChange={e =>{handleInputChange(e)}}>
             </input>
             <input type='number'
-            value = {numbers.length < 5 ? 0 : numbers[5]}
-            className = {isPrime(numbers[5]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-            onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key5'
+            value = {numbers.key5}
+            className = {isPrime(numbers.key5) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+            onChange={e =>{handleInputChange(e)}}>
             </input>
             <input type='number'
-            value = {numbers.length < 6 ? 0 : numbers[6]}
-            className = {isPrime(numbers[6]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-            onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key6'
+            value = {numbers.key6}
+            className = {isPrime(numbers.key6) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+            onChange={e =>{handleInputChange(e)}}>
             </input>
             <input type='number'
-            value = {numbers.length < 7 ? 0 : numbers[7]}
-            className = {isPrime(numbers[7]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-            onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key7'
+            value = {numbers.key7}
+            className = {isPrime(numbers.key7) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+            onChange={e =>{handleInputChange(e)}}>
             </input>
             <input type='number'
-            value = {numbers.length < 8 ? 0 : numbers[8]}
-            className = {isPrime(numbers[8]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-            onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key8'
+            value = {numbers.key8}
+            className = {isPrime(numbers.key8) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+            onChange={e =>{handleInputChange(e)}}>
             </input>
             <input type='number'
-            value = {numbers.length < 9 ? 0 : numbers[9]}
-            className = {isPrime(numbers[9]) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
-            onChange={e =>{handleInputChange(e.target.value)}}>
+            name='key9'
+            value = {numbers.key9}
+            className = {isPrime(numbers.key9) ? 'form-control mt-3 bg-success': 'form-control mt-3'} 
+            onChange={e =>{handleInputChange(e)}}>
             </input>
         
             <button type='submit' className='btn btn-primary mt-3' onClick={e => handleNumbersSubmit(e)}>SEND</button>
