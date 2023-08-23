@@ -10,7 +10,6 @@ const InputNumbers = () => {
         try {
             const response = await axios.post('http://localhost:3001/sort-numbers', {numbers})
             setNumbers(response.data.sortedArr);
-
         } catch (error) {
             console.error(error);
         }
@@ -25,7 +24,7 @@ const InputNumbers = () => {
     const fillRandomData = (e) => {
         e.preventDefault();
         let newArray = [];
-        for(let i = 0; i < 10; i++){
+        for (let i = 0; i < 10; i++) {
             let number = Math.floor((Math.random() * 100000));
             newArray = [...newArray, number];
         }
